@@ -1,4 +1,4 @@
-def conversion800m(time):
+def conversion1500mto800m(time):
     totalseconds = time * 0.492
     minutes = int(totalseconds // 60)
     seconds = ((totalseconds / 60) - minutes)*60
@@ -6,4 +6,4 @@ def conversion800m(time):
     print(f"{minutes}:{seconds}")
 
 #Jakob Kingebrigtsen
-conversion800m(206.73)
+conversion1500mto800m(206.73)
