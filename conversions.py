@@ -20,7 +20,7 @@ def conversionhub(time, distance):
         if 900 < time <= 940:
             time = ((time*0.262)+(time*0.264))/2
         elif 840 < time <= 900:
-            time = time * 0.264
+            time = time * 0.264 # y=0.219x + 41.3 works for this time range
         elif 800 < time <= 840:
             time = ((time*0.271)+(time*0.264))/2 #maybe instead of repeatedly adjusting the code here I can use some sort of a function generator to get this working
                                                  #will probably just test a piecewise function in Desmos 
