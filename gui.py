@@ -13,7 +13,7 @@ from tkinter import ttk
 #     ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=1)
 #     root.mainloop()
 
-def entertimewindow():
+def entertimewindow(): #this isn't being used yet; want to figure out how to have menu for time input pop up after the user selects their distance and clicks "Continue"
     root=Tk()
     frame = ttk.Frame(root, padding=10)
     frame.grid()
