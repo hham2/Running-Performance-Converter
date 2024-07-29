@@ -17,17 +17,7 @@ def conversionhub(time, distance):
     elif distance == "3200m":
         time = time * 0.434
     elif distance == "5000m":
-        if 900 < time <= 940:
-            time = ((time*0.262)+(time*0.264))/2
-        elif 840 < time <= 900:
-            time = time * 0.264 # y=0.219x + 41.3 works for this time range
-        elif 800 < time <= 840:
-            time = ((time*0.271)+(time*0.264))/2 #maybe instead of repeatedly adjusting the code here I can use some sort of a function generator to get this working
-                                                 #will probably just test a piecewise function in Desmos 
-        elif 780 < time <= 800:
-            time = time * 0.271
-        else:
-            time = time * 0.262
+        time = convert5000mto1600m(time)
     # elif distance == "10000m":
     # elif distance == "half-marathon":
     # elif distance == "marathon":
@@ -35,14 +25,32 @@ def conversionhub(time, distance):
 
 
 
-def convert1500mto800m(time):
-    """converts 1500m time to 800m time"""
-    totalseconds = time * 0.4907
-    minutes = int(totalseconds // 60)
-    seconds = ((totalseconds / 60) - minutes)*60
-    seconds = round(seconds, 2)
-    print(f"{minutes}:{seconds}")
-
+def convert5000mto1600m(time):
+    """
+    uses a piecewise function I made to convert a 5000m time to a roughly equivalent
+    1600m time
+    """
+    x = time
+    if time < 780:
+        output = 0.36*x - 50.9
+    elif 780 < time <= 840:
+        output = 0.1833333*x + 87
+    elif 840 < time <= 900:
+        output = 0.18333333*x + 87
+    elif 900 < time <= 960: #I think my conversions in this range are a little too generous
+        output = 0.2*x + 72
+    elif 960 < time <= 1020:
+        output = 0.2166666*x + 56
+    elif 1020 < time <= 1080:
+        output = 0.3*x - 29
+    elif 1080 < time <= 1140:
+        output = 0.28333333*x - 11
+    elif 1140 < time <= 1200: 
+        output = 0.4333333*x - 182
+    else:
+        output = 0.33333*x - 62
+    return output
+    
 #Jakob Kingebrigtsen
 # convert1500mto800m(206.73)
 
@@ -53,7 +61,7 @@ def time_format(time):
     strseconds = str(seconds)
     if seconds == 0:
         strseconds = "00.00"
-    elif True:
+    else:
         if seconds < 10:
             strseconds = "0" + strseconds 
             if "." in strseconds[-2:]:
@@ -63,5 +71,5 @@ def time_format(time):
     result = f"{minutes}:{strseconds}"
     return result
 
-print(conversionhub(900, "5000m"))
+print(time_format(conversionhub(952, "5000m")))
 # print(time_format(480))
