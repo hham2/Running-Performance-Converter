@@ -182,57 +182,87 @@ def convert_1600m_to_800m(time):
     in athletes)
     """
     if time <= 225:
-        output = 0.3*time + 49.7
+        output = 0.471*time - 3.225
     elif 225 < time <= 230:
-        output = 0.46*time + 13.7
+        output = 0.35*time + 24
     elif 230 < time <= 240:
-        output = 0.5*time + 4.5
+        output = 0.5*time - 10.5
     elif 240 < time <= 250:
-        output = 0.35*time + 40.5
+        output = 0.35*time + 25.5
     elif 250 < time <= 260:
-        output = 0.5*time + 3
+        output = 0.5*time - 12
     elif 260 < time <= 280:
-        output = 0.45*time + 16
+        output = 0.35*time + 27
     elif 280 < time <= 300:
-        output = 0.55*time - 12
+        output = 0.4*time + 13
     elif 300 < time <= 320:
-        output = 0.35*time + 48
+        output = 0.45*time - 2
     elif 320 < time <= 340:
-        output = 0.25*time + 80
+        output = 0.3*time + 46
     elif 340 < time <= 360:
-        output = 0.5*time - 5
-    else:
-        output = 0.75*time - 95
+        output = 0.35*time + 29
+    elif 360 < time <= 380:
+        output = 0.75*time - 115
+    else: 
+        output = 0.65*time - 77
     return output
 
 def time_format(time):
     """
     formats a time input as the number of seconds to a 
-    hh:mm:ss time format
+    hh:mm:ss time format, where the "hh" component is omitted
+    if the total time equates to less than 1 hour
     """
     minutes = int(time // 60)
     seconds = ((time / 60) - minutes)*60
     seconds = round(seconds, 2)
     strseconds = str(seconds)
-    if time < 3600:
+    if time < 60: #configuration for times under 60 seconds; omits hours and minutes display
+        if time < 10:
+            strseconds = "0" + strseconds
+        if "." in strseconds[-2:]:
+            strseconds += "0"
+        result = strseconds
+    elif time < 3600: #configuration for times under 1 hour; omits hours display
         if seconds == 0:
             strseconds = "00.00"
-        else:
+        else: 
             if seconds < 10:
                 strseconds = "0" + strseconds 
                 if "." in strseconds[-2:]:
                     strseconds = strseconds + "0"
             elif "." in strseconds[-2:]:
-                strseconds = strseconds + "0"
+                strseconds = strseconds + "0" 
         result = f"{minutes}:{strseconds}"
-    else:
+    else: #configuration for times over 1 hour
         hours = int(time // 3600)
-        minutes = time % 60
+        strhours = str(hours)
+        minutes = int((time // 60)-(hours*60))
         strminutes = str(minutes)
-        # still have to account for edge cases where minutes = 0
-        # and/or seconds = 0 
-        result = f"{hours}:{minutes}:{seconds}"
+        if hours < 10:
+            strhours = "0" + str(hours)
+        if minutes == 0 and seconds == 0:
+            strminutes = "00"
+            strseconds = "00.00"
+        else:
+            if minutes == 0:
+                strminutes = "00"
+            if seconds == 0:
+                strseconds = "00.00"
+        #These conditions check if the minutes column has less than two values and uses the placement of "." to determine if a zero
+        #needs to be added to the seconds columns or tenths/hundredths columns to ensure that there are always 11 characters
+        #when the total time is over 1 hour in length
+        if len(strminutes) != 2 and "." in strseconds[0:2]: #the only scenario where this'd be true is one where the minutes value is less than 10
+            strminutes = "0" + strminutes
+            strseconds = "0" + strseconds
+        elif "." in strseconds[0:2] and len(strminutes) == 2:
+            strseconds = "0" + strseconds
+        elif len(strminutes) != 2 and "." not in strseconds[0:2]:
+            strminutes = "0" + strminutes
+        if "." in strseconds[-2:]:
+            strseconds += "0"
+        result = f"{strhours}:{strminutes}:{strseconds}"
     return result
 
 # print(time_format(conversionhub(952, "5000m")))
-print(time_format(7199.99))
+print(time_format(convert_1600m_to_800m(221.66)))
