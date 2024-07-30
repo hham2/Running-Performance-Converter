@@ -214,17 +214,25 @@ def time_format(time):
     seconds = ((time / 60) - minutes)*60
     seconds = round(seconds, 2)
     strseconds = str(seconds)
-    if seconds == 0:
-        strseconds = "00.00"
-    else:
-        if seconds < 10:
-            strseconds = "0" + strseconds 
-            if "." in strseconds[-2:]:
+    if time < 3600:
+        if seconds == 0:
+            strseconds = "00.00"
+        else:
+            if seconds < 10:
+                strseconds = "0" + strseconds 
+                if "." in strseconds[-2:]:
+                    strseconds = strseconds + "0"
+            elif "." in strseconds[-2:]:
                 strseconds = strseconds + "0"
-        elif "." in strseconds[-2:]:
-            strseconds = strseconds + "0"
-    result = f"{minutes}:{strseconds}"
+        result = f"{minutes}:{strseconds}"
+    else:
+        hours = int(time // 3600)
+        minutes = time % 60
+        strminutes = str(minutes)
+        # still have to account for edge cases where minutes = 0
+        # and/or seconds = 0 
+        result = f"{hours}:{minutes}:{seconds}"
     return result
 
-print(time_format(conversionhub(952, "5000m")))
-# print(time_format(480))
+# print(time_format(conversionhub(952, "5000m")))
+print(time_format(7199.99))
