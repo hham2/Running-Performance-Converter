@@ -15,10 +15,17 @@ from tkinter import ttk
 
 def entertimewindow(): #this isn't being used yet; want to figure out how to have menu for time input pop up after the user selects their distance and clicks "Continue"
     root=Tk()
+    root.geometry("200x200")
     frame = ttk.Frame(root, padding=10)
     frame.grid()
     ttk.Label(frame, text="Thanks for making it this far.")
     root.mainloop()
+
+def open_new_window(root, distance):
+    new_window = Toplevel(root)
+    new_window.title("Input time")
+    new_window.geometry("1280x720")
+    Label(new_window, text = f"This is where you'll input the time you wish to convert. {distance}").pack()
 
 def openwindow():
     root = Tk()
@@ -28,6 +35,7 @@ def openwindow():
         state="readonly", values=["800m",
         "1500m",
         "1600m",
+        "Mile",
         "3000m",
         "3200m",
         "5000m",
@@ -39,10 +47,10 @@ def openwindow():
     ycombo=50
     combo.place(x=xcombo, y=ycombo)
     combo.config(width=50)
-    continuebutton = Button(root, text = "Continue", command=combo.get()) #need to figure out how to have the user selection returned and another window opened where the user will then input a time
-    continuebutton.pack()
+    continuebutton = Button(root, text = "Continue", command=open_new_window(root, combo.get())) #need to figure out how to have the user selection returned and another window opened where the user will then input a time
+    continuebutton.pack(pady=10)
     continuebutton.place(x=xcombo+(xcombo*0.333), y=ycombo+50)
     root.mainloop()
 
-# openwindow()
+openwindow()
 

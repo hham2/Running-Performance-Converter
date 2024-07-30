@@ -8,19 +8,7 @@ def conversionhub(time, distance):
     #temp code begins
     print(time_format(time))
     #temp code ends
-    if distance == "800m":
-        time = time * 2.038
-    elif distance == "1600m":
-        time = time * 0.934
-    elif distance == "3000m":
-        time = time * 0.463
-    elif distance == "3200m":
-        time = time * 0.434
-    elif distance == "5000m":
-        time = convert5000mto1600m(time) #update
-    # elif distance == "10000m":
-    # elif distance == "half-marathon":
-    # elif distance == "marathon":
+    
     return time
 
 def convert_marathon_to_halfmarathon(time):
@@ -265,4 +253,4 @@ def time_format(time):
     return result
 
 # print(time_format(conversionhub(952, "5000m")))
-print(time_format(convert_1600m_to_800m(221.66)))
+print(time_format(convert_1600m_to_800m(193)))
