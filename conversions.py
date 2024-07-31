@@ -1,15 +1,5 @@
-def conversionhub(time, distance):
-    """
-    converts user-input time to an equivalent 1500m time, from 
-    which all other conversions will be made so as to not have
-    to make functions for every possible combination of input 
-    distances and output distances
-    """
-    #temp code begins
-    print(time_format(time))
-    #temp code ends
-    
-    return time
+#todo: implement central conversion function which uses the conversion functions below
+#to produce a list of equivalent times to any input time for any input distance
 
 def convert_marathon_to_halfmarathon(time):
     """
@@ -34,6 +24,12 @@ def convert_marathon_to_halfmarathon(time):
     else:
         output = 0.4333333*time + 360
     return output
+
+def convert_halfmarathon_to_marathon(time):
+    """
+    todo: inverse of convert_marathon_to_halfmarathon()
+    function
+    """
 
 def convert_halfmarathon_to_10000m(time):
     """
@@ -61,6 +57,12 @@ def convert_halfmarathon_to_10000m(time):
         output = 0.58333333*time - 830
     return output
 
+def convert_10000m_to_halfmarathon(time):
+    """
+    todo: inverse of convert_halfmarathon_to_10000m()
+    function
+    """
+
 
 def convert_10000m_to_5000m(time):
     """
@@ -84,12 +86,18 @@ def convert_10000m_to_5000m(time):
         output = 0.541666666*time - 175
     return output
 
+def convert_5000m_to_10000m(time):
+    """
+    todo: inverse of convert_10000m_to_5000m()
+    function
+    """
+
 def convert_5000m_to_1600m(time):
     """
     uses a piecewise function I made to convert a 5000m time to a roughly equivalent
     1600m time
     """
-    if time < 780:
+    if time <= 780:
         output = 0.28*time + 10.5936
     elif 780 < time <= 840:
         output = 0.25*time + 33.9936
@@ -103,10 +111,35 @@ def convert_5000m_to_1600m(time):
         output = 0.3*time - 29
     elif 1080 < time <= 1140:
         output = 0.28333333*time - 11
-    elif 1140 < time <= 1200: 
+    elif 1140 < time <= 1200:
         output = 0.4333333*time - 182
     else:
         output = 0.33333*time - 62
+    return output
+
+def convert_1600m_to_5000m(time):
+    """
+    inverse of convert_5000m_to_1600m()
+    function
+    """
+    if time <= 229:
+        output = (time - 10.5936)*(1/0.28)
+    elif 229 < time <= 244:
+        output = (time - 33.9936)*(1/0.25)
+    elif 244 < time <= 258:
+        output = (time - 47.9936003)*(1/0.2333333)
+    elif 258 < time <= 264:
+        output = (time - 167.9936)*(1/0.1)
+    elif 264 < time <= 277:
+        output = (time - 56)*(1/0.21666666)
+    elif 277 < time <= 295:
+        output = (time + 29)*(1/0.3)
+    elif 295 < time <= 312:
+        output = (time + 11)*(1/0.28333333)
+    elif 312 < time <= 338:
+        output = (time + 182)*(1/0.4333333)
+    else:
+        output = (time + 62)*(1/0.33333)
     return output
 
 def convert_3200m_to_1600m(time):
@@ -116,25 +149,54 @@ def convert_3200m_to_1600m(time):
     a different distance via a second function
     """
     if time <= 480:
-        output = 0.444444*time - 61.1333333
+        output = 0.444444*time + 11.8666666
     elif 480 < time <= 500:
-        output = 0.6*time - 137.8
+        output = 0.6*time - 62.8
     elif 500 < time <= 520:
-        output = 0.34*time - 7.8
+        output = 0.34*time + 67.2
     elif 520 < time <= 560:
-        output = 0.45*time - 65
+        output = 0.45*time + 10
     elif 560 < time <= 600:
-        output = 0.4*time - 37
+        output = 0.4*time + 38
     elif 600 < time <= 660:
-        output = 0.3666666*time - 17
+        output = 0.3666666*time + 58
     elif 660 < time <= 720:
-        output = 0.58333333*time - 160
+        output = 0.58333333*time - 85
     elif 720 < time <= 780:
-        output = 0.41666*time - 40
+        output = 0.41666*time + 35
     elif 780 < time <= 900:
-        output = 0.5*time - 105
+        output = 0.5*time - 30
     else:
-        output = 0.41666666*time - 30
+        output = 0.41666666*time + 45
+    return output
+
+def convert_1600m_to_3200m(time):
+    """
+    inverse of convert_3200m_to_1600m() 
+    function
+    """
+    if time <= 225.2:
+        output = (time - 11.8666666)*(1/0.444444)
+    elif 225.2 < time <= 237.2:
+        output = (time + 62.8)*(1/0.6)
+    elif 237.2 < time <= 244:
+        output = (time - 67.2)*(1/0.34)
+    elif 244 < time <= 262:
+        output = (time - 10)*(1/0.45)
+    elif 262 < time <= 278:
+        output = (time - 38)*(1/0.4)
+    elif 278 < time <= 300:
+        output = (time - 58)*(1/0.3666666)
+    elif 300 < time <= 335:
+        output = (time + 85)*(1/0.58333333)
+    elif 335 < time <= 360:
+        output = (time - 35)*(1/0.416666)
+    elif 360 < time <= 420:
+        output = (time + 30)*(1/0.5)
+    else:
+        output = (time - 45)*(1/0.41666666)
+    return output
+
 
 def convert_3200m_to_3000m(time):
     """
@@ -142,6 +204,14 @@ def convert_3200m_to_3000m(time):
     3000m time
     """
     output = time * 0.932
+    return output
+
+def convert_3000m_to_3200m(time):
+    """
+    inverse of convert_3200m_to_3000m() 
+    function
+    """
+    output = time * (1/0.932)
     return output
 
 def convert_1600m_to_mile(time):
@@ -152,6 +222,14 @@ def convert_1600m_to_mile(time):
     output = time * 1.0063
     return output
 
+def convert_mile_to_1600m(time):
+    """
+    inverse of convert_1600m_to_mile() 
+    function
+    """
+    output = time * (1/1.0063)
+    return output
+
 def convert_1600m_to_1500m(time):
     """
     converts a 1600m time to a roughly
@@ -159,6 +237,15 @@ def convert_1600m_to_1500m(time):
     """
     output = time * 0.932
     return output
+
+def convert_1500m_to_1600m(time):
+    """
+    inverse of convert_1600m_to_1500m() 
+    function
+    """
+    output = time * (1/0.932)
+    return output
+
 
 def convert_1600m_to_800m(time):
     """
@@ -191,9 +278,41 @@ def convert_1600m_to_800m(time):
         output = 0.35*time + 29
     elif 360 < time <= 380:
         output = 0.75*time - 115
-    else: 
+    else:
         output = 0.65*time - 77
     return output
+
+def convert_800m_to_1600m(time):
+    """
+    inverse of convert_1600m_to_800m()
+    function
+    """
+    if time <= 102.75:
+        output = (time + 3.225)*(1/0.471)
+    elif 102.75 < time <= 104.5:
+        output = (time-24)*(1/0.35)
+    elif 104.5 < time <= 109.5:
+        output = (time + 10.5)*(1/0.5)
+    elif 109.5 < time <= 113:
+        output = (time - 25.5)*(1/0.35)
+    elif 113 < time <= 118:
+        output = (time + 12)*(1/0.5)
+    elif 118 < time <= 125:
+        output = (time - 27)*(1/0.35)
+    elif 125 < time <= 133:
+        output = (time - 13)*(1/0.4)
+    elif 133 < time <= 142:
+        output = (time + 2)*(1/0.45)
+    elif 142 < time <= 148:
+        output = (time - 46)*(1/0.3)
+    elif 148 < time <= 155:
+        output = (time - 29)*(1/0.35)
+    elif 155 < time <= 170:
+        output = (time + 115)*(1/0.75)
+    else:
+        output = (time + 77)*(1/0.65)
+    return output
+
 
 def time_format(time):
     """
@@ -214,7 +333,7 @@ def time_format(time):
     elif time < 3600: #configuration for times under 1 hour; omits hours display
         if seconds == 0:
             strseconds = "00.00"
-        else: 
+        else:
             if seconds < 10:
                 strseconds = "0" + strseconds 
                 if "." in strseconds[-2:]:
@@ -253,4 +372,5 @@ def time_format(time):
     return result
 
 # print(time_format(conversionhub(952, "5000m")))
-print(time_format(convert_1600m_to_800m(193)))
+# print(time_format(convert_1600m_to_800m(193)))
+
