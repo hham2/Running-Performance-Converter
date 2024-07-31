@@ -1,5 +1,45 @@
 #todo: implement central conversion function which uses the conversion functions below
 #to produce a list of equivalent times to any input time for any input distance
+def conversionhub(time, distance):
+    # the problem: so as to not have to create functions for every possible combination of distances, I've structured 
+    # my functions to convert the time for a given distance to that for the next-closest distance, and then to convert 
+    # the time for that next-closest distance to the subsequent next-closest distance, and so on: 
+    # to convert a 1600m time to a 10000m time, for example, I'd need to use the convert_1600m_to_5000m() function
+    # and then the convert_5000m_to_10000m() function. But since I don't want to write sequences of "if" statements
+    # for every possible combination of distances (such as an entered 5000m time, where I'd need to use inverse functions
+    # for distances above 5000m functions and my regular functions for distances below 5000m), I need to figure out 
+    # how to create a process that is always able to use the correct functions to convert a given time for a given distance
+    # to calculate an equivalent time for every other distance for which I've implemented conversion functions
+
+    #one way to do it is to convert any given time down to an 800m time and then convert that equivalent 800m
+    #time to an equivalent time at every other longer distance. To convert any given time into an 800m time
+    #would still require some jank but I think it'd be the easiest thing to implement given that I have no 
+    #formal knowledge of algorithms and no knowledge whatsoever of data structures that aren't lists or dictionaries*
+
+    #*My solution:* I could create a dictionary where each item contains a key corresponding to a given distance and a value corresponding
+    #to the position of that distance in the sequence of distances (800m up to marathon). Then I could use "if" statements or some other method
+    #to assign a value to the user input distance and then iterate through the dictionary (with the items() function probably) in reverse order
+    #such that the user input time for the user input distance is converted to an equivalent 800m time. From there I could then use that 800m time
+    #to calculate an equivalent time for every function corresponding to longer distances and add them to a dictionary such that I am left with
+    #a time for every distance that is equivalent to the user input time and distance. After that, I could iterate through the values of the dictionary
+    #and use the time_format() function to convert the time in seconds to hh:mm:ss format. As long as I can ensure that there isn't enough rounding that
+    #we are left with a slightly different time for the user input distance than the time that the user input (which we shouldn't since the time is
+    #only rounded by the time_format() function, which isn't going to be used until the very end)
+
+    #*note about this sentence: I was originally going to write something like "no knowledge of algorithms or knowledge of data structures", 
+    #but then I thought of what I read in the logic section of that Discrete Math textbook and remembered that that statement doesn't unambiguously 
+    #reflect what I meant since I intended for it to be understood that the statement acts as if the "no" at the beginning was also placed before 
+    #"knowledge of data structures", but in terms of formal logic that "or" statement would actually be true even if I did have knowledge of data 
+    #structures, since the "no" only applies to the first statement P when you don't assume that it also applies to the second statement and in formal 
+    #logic doesn't analyze the validity of the implication that the truth of the statement causes the conditions established earlier in the sentence
+
+def list_of_functions():
+    """
+    Returns a list of all the conversion functions in this document
+    """
+    list_of_functions = 
+
+
 
 def convert_marathon_to_halfmarathon(time):
     """
@@ -30,6 +70,23 @@ def convert_halfmarathon_to_marathon(time):
     todo: inverse of convert_marathon_to_halfmarathon()
     function
     """
+    if time <= 3569.6:
+        output = (time + 559.36)*(1/0.552)
+    elif 3569.6 < time <= 3839.6:
+        output = (time - 764.6)*(1/0.375)
+    elif 3839.6 < time <= 4229.6:
+        output = (time + 602.0666666)*(1/0.51666666)
+    elif 4229.6 < time <= 4559.6:
+        output = (time - 141.2666666)*(1/0.48333333)
+    elif 4559.6 < time <= 4859.6:
+        output = (time - 542.9333333)*(1/0.41666666)
+    elif 4859.6 < time <= 5219.6:
+        output = (time + 320.4)*(1/0.5)
+    elif 5219.6 < time <= 5820:
+        output = (time - 843)*(1/0.395)
+    else:
+        output = (time - 360)*(1/0.4333333)
+    return output
 
 def convert_halfmarathon_to_10000m(time):
     """
@@ -41,6 +98,8 @@ def convert_halfmarathon_to_10000m(time):
         output = 0.41666666*time + 135
     elif 3540 < time <= 3600:
         output = 0.5*time - 160
+    elif 3600 < time <= 3720:
+        output = 0.4166666*time + 140
     elif 3720 < time <= 3840:
         output = 0.58333333*time - 480
     elif 3840 < time <= 4200:
@@ -62,7 +121,27 @@ def convert_10000m_to_halfmarathon(time):
     todo: inverse of convert_halfmarathon_to_10000m()
     function
     """
-
+    if time <= 1610:
+        output = (time - 135)*(1/0.41666666)
+    elif 1610 < time <= 1640:
+        output = (time + 160)*(1/0.5)
+    elif 1640 < time <= 1690:
+        output = (time - 140)*(1/0.4166666)
+    elif 1690 < time <= 1760:
+        output = (time + 480)*(1/0.58333333)
+    elif 1760 < time <= 1890:
+        output = (time - 373.33333)*(1/0.36111)
+    elif 1890 < time <= 2010:
+        output = (time - 490)*(1/0.333333)
+    elif 2010 < time <= 2190:
+        output = (time + 270)*(1/0.5)
+    elif 2190 < time <= 2490:
+        output = (time - 140)*(0.41666666)
+    elif 2490 < time <= 2670:
+        output = (time + 330)*(1/0.5)
+    else:
+        output = (time + 830)*(1/0.58333333)
+    return output
 
 def convert_10000m_to_5000m(time):
     """
@@ -91,6 +170,21 @@ def convert_5000m_to_10000m(time):
     todo: inverse of convert_10000m_to_5000m()
     function
     """
+    if time <= 785:
+        output = (time + 241)*(1/0.6333333)
+    elif 785 < time <= 810:
+        output = (time - 110)*(1/0.41666666)
+    elif 810 < time <= 865:
+        output = (time - 40)*(1/0.458333333)
+    elif 865 < time <= 925:
+        output = (time + 35)*(1/0.5)
+    elif 925 < time <= 1090:
+        output = (time - 45)*(1/0.458333333)
+    elif 1090 < time <= 1190:
+        output = (time - 140)*(1/0.41666666)
+    else:
+        output = (time + 175)*(1/0.541666666)
+    return output
 
 def convert_5000m_to_1600m(time):
     """
@@ -103,7 +197,7 @@ def convert_5000m_to_1600m(time):
         output = 0.25*time + 33.9936
     elif 840 < time <= 900:
         output = 0.2333333*time + 47.9936003
-    elif 900 < time <= 960: 
+    elif 900 < time <= 960:
         output = 0.1*time + 167.9936
     elif 960 < time <= 1020:
         output = 0.2166666*time + 56
@@ -358,7 +452,7 @@ def time_format(time):
                 strseconds = "00.00"
         #These conditions check if the minutes column has less than two values and uses the placement of "." to determine if a zero
         #needs to be added to the seconds columns or tenths/hundredths columns to ensure that there are always 11 characters
-        #when the total time is over 1 hour in length
+        #when the total time is over 1 hour and under 100 hours in length
         if len(strminutes) != 2 and "." in strseconds[0:2]: #the only scenario where this'd be true is one where the minutes value is less than 10
             strminutes = "0" + strminutes
             strseconds = "0" + strseconds
@@ -373,4 +467,3 @@ def time_format(time):
 
 # print(time_format(conversionhub(952, "5000m")))
 # print(time_format(convert_1600m_to_800m(193)))
-
