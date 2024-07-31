@@ -1,5 +1,15 @@
 #todo: implement central conversion function which uses the conversion functions below
 #to produce a list of equivalent times to any input time for any input distance
+def conversionhub(time, userdistance):
+    """
+    Takes a user input time for a user input distance and creates a table with
+    equivalent times for several other distances
+    """
+    converted_800m_time = convert_to_800m(time, userdistance)
+    conversiontable = conversion_table(converted_800m_time)
+    print(conversiontable)
+
+
 def convert_to_800m(time, userdistance):
     # the problem: so as to not have to create functions for every possible combination of distances, I've structured 
     # my functions to convert the time for a given distance to that for the next-closest distance, and then to convert 
@@ -78,10 +88,19 @@ def conversion_table(converted_800m_time):
     returns a dictionary with a distance as the key for each item and the equivalent 
     time to the original user input time as the value for each item
     """
-    conversion_table = {
-        "800m":converted_800m_time,
-        "1500m":
+    conversions = {
+        "800m": converted_800m_time,
+        "1500m": convert_800m_to_1500m(converted_800m_time),
+        "1600m": convert_800m_to_1600m(converted_800m_time),
+        "Mile": convert_800m_to_mile(converted_800m_time),
+        "3000m": convert_800m_to_3000m(converted_800m_time),
+        "3200m": convert_800m_to_3200m(converted_800m_time),
+        "5000m": convert_800m_to_5000m(converted_800m_time),
+        "10000m": convert_800m_to_10000m(converted_800m_time),
+        "Half marathon": convert_800m_to_halfmarathon(converted_800m_time),
+        "Marathon": convert_800m_to_marathon(converted_800m_time)
     }
+    return conversions
 
 def index_user_input_distance(userdistance):
     """
@@ -108,20 +127,95 @@ def index_user_input_distance(userdistance):
     return counter
 
 def convert_800m_to_1500m(time_800m):
+    """
+    converts an 800m time to a roughly equivalent 1500m time 
+    """
+    converted_1600m = convert_800m_to_1600m(time_800m)
+    converted_1500m = convert_1600m_to_1500m(converted_1600m)
+    #temp code begins
+    print(converted_1500m)
+    #temp code ends
+    return converted_1500m
     
+#800m to 1600m conversions will just use the pre-existing convert_800m_to_1600m() function 
+
 def convert_800m_to_mile(time_800m): 
+    """
+    converts an 800m time to a roughly equivalent mile time 
+    """
+    converted_1600m = convert_800m_to_1600m(time_800m)
+    converted_mile = convert_1600m_to_mile(converted_1600m)
+    #temp code begins
+    print(converted_mile)
+    #temp code ends
+    return converted_mile
 
 def convert_800m_to_3000m(time_800m):
+    """
+    converts an 800m time to a roughly equivalent 3000m time 
+    """
+    converted_1600m = convert_800m_to_1600m(time_800m)
+    converted_3200m = convert_1600m_to_3200m(converted_1600m)
+    converted_3000m = convert_3200m_to_3000m(converted_3200m)
+        #temp code begins
+    print(converted_3000m)
+    #temp code ends
+    return converted_3000m
 
 def convert_800m_to_3200m(time_800m):
+    """
+    converts an 800m time to a roughly equivalent 3200m time 
+    """
+    converted_1600m = convert_800m_to_1600m(time_800m)
+    converted_3200m = convert_1600m_to_3200m(converted_1600m)
+        #temp code begins
+    print(converted_3200m)
+    #temp code ends
+    return converted_3200m
 
 def convert_800m_to_5000m(time_800m):
+    """
+    converts an 800m time to a roughly equivalent 5000m time 
+    """
+    converted_1600m = convert_800m_to_1600m(time_800m)
+    converted_5000m = convert_1600m_to_5000m(converted_1600m)
+        #temp code begins
+    print(converted_5000m)
+    #temp code ends
+    return converted_5000m
 
 def convert_800m_to_10000m(time_800m):
+    """
+    converts an 800m time to a roughly equivalent 10000m time 
+    """
+    converted_5000m = convert_800m_to_5000m(time_800m)
+    converted_10000m = convert_5000m_to_10000m(converted_5000m)
+        #temp code begins
+    print(converted_10000m)
+    #temp code ends
+    return converted_10000m
 
 def convert_800m_to_halfmarathon(time_800m):
+    """
+    converts an 800m time to a roughly equivalent half marathon time 
+    """
+    converted_10000m = convert_800m_to_10000m(time_800m)
+    converted_halfmarathon = convert_10000m_to_halfmarathon(converted_10000m)
+        #temp code begins
+    print(converted_halfmarathon)
+    #temp code ends
+    return converted_halfmarathon
 
 def convert_800m_to_marathon(time_800m):
+    """
+    converts an 800m time to a roughly equivalent marathon time 
+    """
+    converted_halfmarathon = convert_800m_to_halfmarathon(time_800m)
+    converted_marathon = convert_halfmarathon_to_marathon(converted_halfmarathon)
+        #temp code begins
+    print(converted_marathon)
+    #temp code ends
+    return converted_marathon
 
 
 def convert_marathon_to_halfmarathon(time):
@@ -550,3 +644,4 @@ def time_format(time):
 
 # print(time_format(conversionhub(952, "5000m")))
 # print(time_format(convert_1600m_to_800m(193)))
+conversionhub(300, "Mile")
