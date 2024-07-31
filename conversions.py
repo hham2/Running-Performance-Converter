@@ -1,6 +1,6 @@
 #todo: implement central conversion function which uses the conversion functions below
 #to produce a list of equivalent times to any input time for any input distance
-def conversionhub(time, distance):
+def convert_to_800m(time, userdistance):
     # the problem: so as to not have to create functions for every possible combination of distances, I've structured 
     # my functions to convert the time for a given distance to that for the next-closest distance, and then to convert 
     # the time for that next-closest distance to the subsequent next-closest distance, and so on: 
@@ -27,18 +27,101 @@ def conversionhub(time, distance):
     #only rounded by the time_format() function, which isn't going to be used until the very end)
 
     #*note about this sentence: I was originally going to write something like "no knowledge of algorithms or knowledge of data structures", 
-    #but then I thought of what I read in the logic section of that Discrete Math textbook and remembered that that statement doesn't unambiguously 
+    #but then I thought of what I read in the logic section of that discrete math textbook and remembered that that statement doesn't unambiguously 
     #reflect what I meant since I intended for it to be understood that the statement acts as if the "no" at the beginning was also placed before 
     #"knowledge of data structures", but in terms of formal logic that "or" statement would actually be true even if I did have knowledge of data 
-    #structures, since the "no" only applies to the first statement P when you don't assume that it also applies to the second statement and in formal 
+    #structures, since the "no" only applies to the first statement P when you don't assume that it also applies to the second statement and formal 
     #logic doesn't analyze the validity of the implication that the truth of the statement causes the conditions established earlier in the sentence
-
-def list_of_functions():
     """
-    Returns a list of all the conversion functions in this document
+    returns an 800m time roughly equivalent (by my conversion functions) to any user input time for any user input distance
     """
-    list_of_functions = 
+    distance_index = index_user_input_distance(userdistance) #dumb way to do this but it's probably good enough
+    if distance_index == 0: #800m
+        converted_800m_time = time
+    elif distance_index == 1: #1500m
+        converted_1600m_time = convert_1500m_to_1600m(time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    elif distance_index == 2: #1600m
+        converted_800m_time = convert_1600m_to_800m(time)
+    elif distance_index == 3: #mile
+        converted_1600m_time = convert_mile_to_1600m(time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    elif distance_index == 4: #3000m
+        converted_3200m_time = convert_3000m_to_3200m(time)
+        converted_1600m_time = convert_3200m_to_1600m(converted_3200m_time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    elif distance_index == 5: #3200m
+        converted_1600m_time = convert_3200m_to_1600m(time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    elif distance_index == 6: #5000m
+        converted_1600m_time = convert_5000m_to_1600m(time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    elif distance_index == 7: #10000m
+        converted_5000m_time = convert_10000m_to_5000m(time)
+        converted_1600m_time = convert_5000m_to_1600m(converted_5000m_time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    elif distance_index == 8: #half marathon
+        converted_10000m_time = convert_halfmarathon_to_10000m(time)
+        converted_5000m_time = convert_10000m_to_5000m(converted_10000m_time)
+        converted_1600m_time = convert_5000m_to_1600m(converted_5000m_time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    else:                     #marathon
+        converted_halfmarathon_time = convert_marathon_to_halfmarathon(time)
+        converted_10000m_time = convert_halfmarathon_to_10000m(converted_halfmarathon_time)
+        converted_5000m_time = convert_10000m_to_5000m(converted_10000m_time)
+        converted_1600m_time = convert_5000m_to_1600m(converted_5000m_time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    return converted_800m_time
 
+def conversion_table(converted_800m_time):
+    """
+    returns a dictionary with a distance as the key for each item and the equivalent 
+    time to the original user input time as the value for each item
+    """
+    conversion_table = {
+        "800m":converted_800m_time,
+        "1500m":
+    }
+
+def index_user_input_distance(userdistance):
+    """
+    returns a numerical value corresponding to the position of the user input (userdistance) in a sequential list of all distances for which I've made
+    conversion functions, beginning at the shortest distance and ending at the longest distance.
+    """
+    list_of_distances = [
+    "800m",
+    "1500m",
+    "1600m",
+    "Mile",
+    "3000m",
+    "3200m",
+    "5000m",
+    "10000m",
+    "Half marathon",
+    "Marathon"
+]
+    counter = 0 #this will correspond to the index of the distance input by the user once the for loop has finished iterating over the list of distances
+    for distance in list_of_distances:
+        counter += 1
+        if distance == userdistance:
+            break
+    return counter
+
+def convert_800m_to_1500m(time_800m):
+    
+def convert_800m_to_mile(time_800m): 
+
+def convert_800m_to_3000m(time_800m):
+
+def convert_800m_to_3200m(time_800m):
+
+def convert_800m_to_5000m(time_800m):
+
+def convert_800m_to_10000m(time_800m):
+
+def convert_800m_to_halfmarathon(time_800m):
+
+def convert_800m_to_marathon(time_800m):
 
 
 def convert_marathon_to_halfmarathon(time):
