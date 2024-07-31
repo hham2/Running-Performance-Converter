@@ -89,16 +89,16 @@ def conversion_table(converted_800m_time):
     time to the original user input time as the value for each item
     """
     conversions = {
-        "800m": converted_800m_time,
-        "1500m": convert_800m_to_1500m(converted_800m_time),
-        "1600m": convert_800m_to_1600m(converted_800m_time),
-        "Mile": convert_800m_to_mile(converted_800m_time),
-        "3000m": convert_800m_to_3000m(converted_800m_time),
-        "3200m": convert_800m_to_3200m(converted_800m_time),
-        "5000m": convert_800m_to_5000m(converted_800m_time),
-        "10000m": convert_800m_to_10000m(converted_800m_time),
-        "Half marathon": convert_800m_to_halfmarathon(converted_800m_time),
-        "Marathon": convert_800m_to_marathon(converted_800m_time)
+        "800m": time_format(converted_800m_time),
+        "1500m": time_format(convert_800m_to_1500m(converted_800m_time)),
+        "1600m": time_format(convert_800m_to_1600m(converted_800m_time)),
+        "Mile": time_format(convert_800m_to_mile(converted_800m_time)),
+        "3000m": time_format(convert_800m_to_3000m(converted_800m_time)),
+        "3200m": time_format(convert_800m_to_3200m(converted_800m_time)),
+        "5000m": time_format(convert_800m_to_5000m(converted_800m_time)),
+        "10000m": time_format(convert_800m_to_10000m(converted_800m_time)),
+        "Half marathon": time_format(convert_800m_to_halfmarathon(converted_800m_time)),
+        "Marathon": time_format(convert_800m_to_marathon(converted_800m_time))
     }
     return conversions
 
@@ -593,8 +593,8 @@ def time_format(time):
         strhours = str(hours)
         minutes = int((time // 60)-(hours*60))
         strminutes = str(minutes)
-        if hours < 10:
-            strhours = "0" + str(hours)
+        # if hours < 10: #I don't think I want this feature anymore so I'm gonna comment it out 
+        #     strhours = "0" + str(hours)
         if minutes == 0 and seconds == 0:
             strminutes = "00"
             strseconds = "00.00"
@@ -621,4 +621,4 @@ def time_format(time):
 # print(time_format(conversionhub(952, "5000m")))
 # print(time_format(convert_1600m_to_800m(193)))
 
-conversionhub(124.3, "800m")
+conversionhub(101.46, "800m")
