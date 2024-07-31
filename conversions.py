@@ -63,14 +63,18 @@ def convert_to_800m(time, userdistance):
     elif distance_index == 5: #3200m
         converted_1600m_time = convert_3200m_to_1600m(time)
         converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
-    elif distance_index == 6: #5000m
+    elif distance_index == 6: #2 mile
+        converted_3200m_time = convert_2mile_to_3200m(time)
+        converted_1600m_time = convert_3200m_to_1600m(converted_3200m_time)
+        converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
+    elif distance_index == 7: #5000m
         converted_1600m_time = convert_5000m_to_1600m(time)
         converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
-    elif distance_index == 7: #10000m
+    elif distance_index == 8: #10000m
         converted_5000m_time = convert_10000m_to_5000m(time)
         converted_1600m_time = convert_5000m_to_1600m(converted_5000m_time)
         converted_800m_time = convert_1600m_to_800m(converted_1600m_time)
-    elif distance_index == 8: #half marathon
+    elif distance_index == 9: #half marathon
         converted_10000m_time = convert_halfmarathon_to_10000m(time)
         converted_5000m_time = convert_10000m_to_5000m(converted_10000m_time)
         converted_1600m_time = convert_5000m_to_1600m(converted_5000m_time)
@@ -95,6 +99,7 @@ def conversion_table(converted_800m_time):
         "Mile": time_format(convert_800m_to_mile(converted_800m_time)),
         "3000m": time_format(convert_800m_to_3000m(converted_800m_time)),
         "3200m": time_format(convert_800m_to_3200m(converted_800m_time)),
+        "2 mile": time_format(convert_800m_to_2mile(converted_800m_time)),
         "5000m": time_format(convert_800m_to_5000m(converted_800m_time)),
         "10000m": time_format(convert_800m_to_10000m(converted_800m_time)),
         "Half marathon": time_format(convert_800m_to_halfmarathon(converted_800m_time)),
@@ -114,6 +119,7 @@ def index_user_input_distance(userdistance):
     "Mile",
     "3000m",
     "3200m",
+    "2 mile",
     "5000m",
     "10000m",
     "Half marathon",
@@ -160,6 +166,14 @@ def convert_800m_to_3200m(time_800m):
     converted_1600m = convert_800m_to_1600m(time_800m)
     converted_3200m = convert_1600m_to_3200m(converted_1600m)
     return converted_3200m
+
+def convert_800m_to_2mile(time_800m):
+    """
+    converts an 800m time to a roughly equivalent 2 mile time
+    """
+    converted_3200m = convert_800m_to_3200m(time_800m)
+    converted_2mile = convert_3200m_to_2mile(converted_3200m)
+    return converted_2mile
 
 def convert_800m_to_5000m(time_800m):
     """
@@ -444,6 +458,21 @@ def convert_1600m_to_3200m(time):
         output = (time - 45)*(1/0.41666666)
     return output
 
+def convert_3200m_to_2mile(time):
+    """
+    converts a 3200m time to a roughly equivalent
+    2 mile time
+    """
+    output = time * 1.0063
+    return output
+
+def convert_2mile_to_3200m(time):
+    """
+    converts a 2 mile time to a roughly equivalent
+    3200m time
+    """
+    output = time * (1/1.0063)
+    return output
 
 def convert_3200m_to_3000m(time):
     """
@@ -621,4 +650,4 @@ def time_format(time):
 # print(time_format(conversionhub(952, "5000m")))
 # print(time_format(convert_1600m_to_800m(193)))
 
-conversionhub(101.46, "800m")
+# conversionhub(600, "3200m")
