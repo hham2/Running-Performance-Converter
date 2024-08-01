@@ -1,1 +1,2 @@
-I'm gonna try to create a running performance converter (like Jack Daniels VDOT) as my first coding project outside of a programming class (of which I've taken one). The only problem is that I only know the very basics of Python.
+I'm gonna try to create a running performance converter (like Jack Daniels VDOT) as my first coding project outside of a programming class (of which I've taken one). The only problem is that I only know the very basics of Python. 
+I'm basing these conversions on my own understanding of equivalent performances at various distances since the point of this is really to see a coding project through to fruition.

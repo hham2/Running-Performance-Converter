@@ -1,31 +1,28 @@
 from tkinter import *
 from tkinter import ttk
 
-#I copied the basis for this code from the tkinter documentation and have no idea how to use this
-# def openwindow():
-    
-#     root = Tk()
-#     frm = ttk.Frame(root, padding=10)
-#     frm.grid()
-#     ttk.Label(frm, text="Welcome. This program will show you equivalent performances to any given race time.").grid(column=0, row=0)
-    
-#     ttk.Button(frm, text="Choose distance") 
-#     ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=1)
-#     root.mainloop()
 
-def entertimewindow(): #this isn't being used yet; want to figure out how to have menu for time input pop up after the user selects their distance and clicks "Continue"
-    root=Tk()
-    root.geometry("200x200")
-    frame = ttk.Frame(root, padding=10)
-    frame.grid()
-    ttk.Label(frame, text="Thanks for making it this far.")
-    root.mainloop()
-
-def open_new_window(root, distance):
-    new_window = Toplevel(root)
-    new_window.title("Input time")
+def open_new_window():
+    """
+    opens a new window 
+    """
+    new_window = Toplevel(master)
+    new_window.title("New Window")
     new_window.geometry("1280x720")
-    Label(new_window, text = f"This is where you'll input the time you wish to convert. {distance}").pack()
+    Label(new_window, text = "this is a new window").pack()
+
+master = Tk() # I guess I can't put this in a function without opening more tabs than desired?
+master.geometry("1280x720")
+label = Label(master, text = "this is the main window")
+label.pack(pady=10)
+button = Button(master, text = "Click to open a new window", command = open_new_window)
+button2 = Button(master, text = "Exit", command = master.quit)
+button.pack(pady=10)
+button2.pack(pady=10)
+master.mainloop()
+# need to figure out how to store whichever option is picked from the drop down menu
+
+
 
 def openwindow():
     root = Tk()
@@ -51,6 +48,4 @@ def openwindow():
     continuebutton.pack(pady=10)
     continuebutton.place(x=xcombo+(xcombo*0.333), y=ycombo+50)
     root.mainloop()
-
-openwindow()
 

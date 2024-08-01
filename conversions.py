@@ -609,13 +609,16 @@ def time_format(time):
     elif time < 3600: #configuration for times under 1 hour; omits hours display
         if seconds == 0:
             strseconds = "00.00"
+        elif seconds == 60:
+            minutes += 1
+            strseconds = "00.00"
         else:
             if seconds < 10:
                 strseconds = "0" + strseconds 
                 if "." in strseconds[-2:]:
                     strseconds = strseconds + "0"
             elif "." in strseconds[-2:]:
-                strseconds = strseconds + "0" 
+                strseconds = strseconds + "0"
         result = f"{minutes}:{strseconds}"
     else: #configuration for times over 1 hour
         hours = int(time // 3600)
@@ -650,4 +653,4 @@ def time_format(time):
 # print(time_format(conversionhub(952, "5000m")))
 # print(time_format(convert_1600m_to_800m(193)))
 
-# conversionhub(600, "3200m")
+# conversionhub(206, "1500m")
