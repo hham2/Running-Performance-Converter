@@ -303,7 +303,7 @@ def convert_10000m_to_halfmarathon(time):
     elif 2010 < time <= 2190:
         output = (time + 270)*(1/0.5)
     elif 2190 < time <= 2490:
-        output = (time - 140)*(0.41666666)
+        output = (time - 140)*(1/0.41666666)
     elif 2490 < time <= 2670:
         output = (time + 330)*(1/0.5)
     else:
@@ -649,8 +649,3 @@ def time_format(time):
             strseconds += "0"
         result = f"{strhours}:{strminutes}:{strseconds}"
     return result
-
-# print(time_format(conversionhub(952, "5000m")))
-# print(time_format(convert_1600m_to_800m(193)))
-
-# conversionhub(206, "1500m")
