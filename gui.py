@@ -6,13 +6,16 @@ def open_new_window():
     """
     opens a new window 
     """
-    new_window = Toplevel(master)
+    master.destroy()
+    master1 = Tk()
+    master1.withdraw() #hides the blank window while still allowing master1 to be used to create the labeled new window
+    new_window = Toplevel(master1)
     new_window.title("New Window")
     new_window.geometry("1280x720")
     Label(new_window, text = "this is a new window").pack()
 
-master = Tk() # I guess I can't put this in a function without opening more tabs than desired?
-master.geometry("1280x720")
+master = Tk() 
+master.geometry("1280x720")                                                             
 label = Label(master, text = "this is the main window")
 label.pack(pady=10)
 button = Button(master, text = "Click to open a new window", command = open_new_window)
@@ -29,12 +32,14 @@ def openwindow():
     root.config(width=1280, height=720)
     root.title("Conversions")
     combo = ttk.Combobox(
-        state="readonly", values=["800m",
+        state="readonly", values=[
+        "800m",
         "1500m",
         "1600m",
         "Mile",
         "3000m",
         "3200m",
+        "2 mile",
         "5000m",
         "10000m",
         "Half marathon",
