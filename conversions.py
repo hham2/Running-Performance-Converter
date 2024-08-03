@@ -1,5 +1,3 @@
-#todo: implement central conversion function which uses the conversion functions below
-#to produce a list of equivalent times to any input time for any input distance
 def conversionhub(time, userdistance):
     """
     Takes a user input time for a user input distance and creates a table with
@@ -11,37 +9,6 @@ def conversionhub(time, userdistance):
 
 
 def convert_to_800m(time, userdistance):
-    # the problem: so as to not have to create functions for every possible combination of distances, I've structured 
-    # my functions to convert the time for a given distance to that for the next-closest distance, and then to convert 
-    # the time for that next-closest distance to the subsequent next-closest distance, and so on: 
-    # to convert a 1600m time to a 10000m time, for example, I'd need to use the convert_1600m_to_5000m() function
-    # and then the convert_5000m_to_10000m() function. But since I don't want to write sequences of "if" statements
-    # for every possible combination of distances (such as an entered 5000m time, where I'd need to use inverse functions
-    # for distances above 5000m functions and my regular functions for distances below 5000m), I need to figure out 
-    # how to create a process that is always able to use the correct functions to convert a given time for a given distance
-    # to calculate an equivalent time for every other distance for which I've implemented conversion functions
-
-    #one way to do it is to convert any given time down to an 800m time and then convert that equivalent 800m
-    #time to an equivalent time at every other longer distance. To convert any given time into an 800m time
-    #would still require some jank but I think it'd be the easiest thing to implement given that I have no 
-    #formal knowledge of algorithms and no knowledge whatsoever of data structures that aren't lists or dictionaries*
-
-    #*My solution:* I could create a dictionary where each item contains a key corresponding to a given distance and a value corresponding
-    #to the position of that distance in the sequence of distances (800m up to marathon). Then I could use "if" statements or some other method
-    #to assign a value to the user input distance and then iterate through the dictionary (with the items() function probably) in reverse order
-    #such that the user input time for the user input distance is converted to an equivalent 800m time. From there I could then use that 800m time
-    #to calculate an equivalent time for every function corresponding to longer distances and add them to a dictionary such that I am left with
-    #a time for every distance that is equivalent to the user input time and distance. After that, I could iterate through the values of the dictionary
-    #and use the time_format() function to convert the time in seconds to hh:mm:ss format. As long as I can ensure that there isn't enough rounding that
-    #we are left with a slightly different time for the user input distance than the time that the user input (which we shouldn't since the time is
-    #only rounded by the time_format() function, which isn't going to be used until the very end)
-
-    #*note about this sentence: I was originally going to write something like "no knowledge of algorithms or knowledge of data structures", 
-    #but then I thought of what I read in the logic section of that discrete math textbook and remembered that that statement doesn't unambiguously 
-    #reflect what I meant since I intended for it to be understood that the statement acts as if the "no" at the beginning was also placed before 
-    #"knowledge of data structures", but in terms of formal logic that "or" statement would actually be true even if I did have knowledge of data 
-    #structures, since the "no" only applies to the first statement P when you don't assume that it also applies to the second statement and formal 
-    #logic doesn't analyze the validity of the implication that the truth of the statement causes the conditions established earlier in the sentence
     """
     returns an 800m time roughly equivalent (by my conversion functions) to any user input time for any user input distance
     """
@@ -234,7 +201,7 @@ def convert_marathon_to_halfmarathon(time):
 
 def convert_halfmarathon_to_marathon(time):
     """
-    todo: inverse of convert_marathon_to_halfmarathon()
+    inverse of convert_marathon_to_halfmarathon()
     function
     """
     if time <= 3569.6:
@@ -285,7 +252,7 @@ def convert_halfmarathon_to_10000m(time):
 
 def convert_10000m_to_halfmarathon(time):
     """
-    todo: inverse of convert_halfmarathon_to_10000m()
+    inverse of convert_halfmarathon_to_10000m()
     function
     """
     if time <= 1610:
@@ -334,7 +301,7 @@ def convert_10000m_to_5000m(time):
 
 def convert_5000m_to_10000m(time):
     """
-    todo: inverse of convert_10000m_to_5000m()
+    inverse of convert_10000m_to_5000m()
     function
     """
     if time <= 785:
