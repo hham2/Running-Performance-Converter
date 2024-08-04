@@ -25,7 +25,7 @@ def open_new_window():
     new_window.title("New Window")
     new_window.geometry("1280x720")
     Label(new_window, text = f"Distance: {distance_selection}\nTime: {time_format(convert_user_input_time())}").pack()
-    Label(new_window, text = conversionhub(convert_user_input_time(), distance_selection)).pack() # just a test to make sure this works; not final
+    Label(new_window, text = conversionhubformatting(convert_user_input_time(), distance_selection)).pack() # just a test to make sure this works; not final
     # restartbutton = Button(new_window, text = "Convert another time", command = restart_program) # this doesn't work right now
     exitbutton= Button(new_window, text = "Exit", command = master.quit)
     # restartbutton.pack(pady=10)
@@ -48,9 +48,8 @@ def conversionhubformatting(time, distance):
                 spaces += " "
                 characters += 1
         string = f"{item[0]}:" + spaces + f"{item[1]}" # this string is 29 characters long
-        bigstring += f"{string}\n" #concatenates all of the newline-separated right-aligned strings 
+        bigstring += f"{string}\n" #concatenates all of the newline-separated right-aligned strings
     return bigstring
-# conversionhubformatting(300, "Mile")
 
 def list_of_options():
     """
