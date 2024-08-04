@@ -187,7 +187,7 @@ def convert_marathon_to_halfmarathon(time):
     elif 8200 < time <= 8920:
         output = 0.541666666*time - 602.0666666
     elif 8920 < time <= 9640:
-        output = 0.48333333*time + 141.2666666
+        output = 0.458333333*time + 141.2666666
     elif 9640 < time <= 10360:
         output = 0.41666666*time + 542.9333333
     elif 10360 < time <= 11080:
@@ -210,7 +210,7 @@ def convert_halfmarathon_to_marathon(time):
     elif 3839.6 < time <= 4229.6:
         output = (time + 602.0666666)*(1/0.541666666)
     elif 4229.6 < time <= 4559.6:
-        output = (time - 141.2666666)*(1/0.48333333)
+        output = (time - 141.2666666)*(1/0.458333333)
     elif 4559.6 < time <= 4859.6:
         output = (time - 542.9333333)*(1/0.41666666)
     elif 4859.6 < time <= 5219.6:
