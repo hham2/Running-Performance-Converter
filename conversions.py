@@ -581,10 +581,8 @@ def time_format(time):
             strseconds = "00.00"
         else:
             if seconds < 10:
-                strseconds = "0" + strseconds 
-                if "." in strseconds[-2:]:
-                    strseconds = strseconds + "0"
-            elif "." in strseconds[-2:]:
+                strseconds = "0" + strseconds
+            if "." in strseconds[-2:]:
                 strseconds = strseconds + "0"
         result = f"{minutes}:{strseconds}"
     else: #configuration for times over 1 hour
@@ -605,13 +603,10 @@ def time_format(time):
         #These conditions check if the minutes column has less than two values and uses the placement of "." to determine if a zero
         #needs to be added to the seconds columns or tenths/hundredths columns to ensure that there are always 11 characters
         #when the total time is over 1 hour and under 100 hours in length
-        if len(strminutes) != 2 and "." in strseconds[0:2]: #the only scenario where this'd be true is one where the minutes value is less than 10
+        if len(strminutes) != 2:
             strminutes = "0" + strminutes
+        if "." in strseconds[0:2]: #the only scenario where this'd be true is one where the minutes value is less than 10
             strseconds = "0" + strseconds
-        elif "." in strseconds[0:2] and len(strminutes) == 2:
-            strseconds = "0" + strseconds
-        elif len(strminutes) != 2 and "." not in strseconds[0:2]:
-            strminutes = "0" + strminutes
         if "." in strseconds[-2:]:
             strseconds += "0"
         result = f"{strhours}:{strminutes}:{strseconds}"
