@@ -5,8 +5,7 @@ def conversionhub(time, userdistance):
     """
     converted_800m_time = convert_to_800m(time, userdistance)
     conversiontable = conversion_table(converted_800m_time)
-    print(conversiontable)
-
+    return conversiontable
 
 def convert_to_800m(time, userdistance):
     """

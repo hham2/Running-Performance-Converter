@@ -1,6 +1,6 @@
-from gui import *
+# from gui import *
 
-def main():
-    openwindow()
+# def main():
+#     openwindow()
 
-main()
+# # main()
