@@ -197,7 +197,7 @@ def convert_marathon_to_halfmarathon(time):
     else:
         output = 0.4333333*time + 360
     return output
-print(convert_marathon_to_halfmarathon(8773.29))
+
 def convert_halfmarathon_to_marathon(time):
     """
     inverse of convert_marathon_to_halfmarathon()
@@ -208,7 +208,7 @@ def convert_halfmarathon_to_marathon(time):
     elif 3569.6 < time <= 3839.6:
         output = (time - 764.6)*(1/0.375)
     elif 3839.6 < time <= 4229.6:
-        output = (time + 602.0666666)*(1/0.51666666)
+        output = (time + 602.0666666)*(1/0.541666666)
     elif 4229.6 < time <= 4559.6:
         output = (time - 141.2666666)*(1/0.48333333)
     elif 4559.6 < time <= 4859.6:
