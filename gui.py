@@ -13,7 +13,6 @@ def open_new_window():
     new_window.title("New Window")
     new_window.geometry("1280x720")
     Label(new_window, text = f"Distance: {distance_selection}\nTime: [todo: time_input]").pack()
-    print(hours_selection)
 
 def list_of_options():
     """
@@ -33,7 +32,7 @@ def list_of_options():
         "Marathon"]
     return options
 
-def click(event): #this function will cause a TypeError when used as an argument for the combobox bind() function if "event" is not used as an argument, for some reason
+def click(event): #this function will cause a TypeError when used as an argument for the combobox bind() function if "event" is not used as a parameter, for some reason
     """
     used to assign the user's selection to a variable that will be used in the next window 
     and for that selection to be made when a user clicks a given option from the drop down menu
@@ -45,10 +44,12 @@ def retrievehours():
     """
     Retrieves the number of hours in the user's entered time. By default this value is 0
     """
+    a = hourstextbox.get("1.0", "end-1c") #probably gonna need to make this global
+    #will need to make equivalent functions for minutes and seconds
 
 
 master = Tk() #opens main (initial) window
-master.geometry("1280x720")                                                          
+master.geometry("1280x720")                              
 label = Label(master, text = "Please select a distance")
 label.pack(pady=10)
 
@@ -59,18 +60,21 @@ distance_selection = "800m" #default selection value is 800m - will be changed i
 cb.bind("<<ComboboxSelected>>", click)
 cb.pack()
 
-# text box code
-# probably going to have three separate text boxes labeled "hours","minutes", and "seconds" that will each store input
-# that will then be converted to seconds using a function I'll make
-textbox = Text(master, height=1, width=10)
-textbox.pack()
-hours_selection = textbox.get #need to figure out how to store user input - this isn't quite doing it 
+# hours text box
+hourstextbox = Text(master, height=1, width=10)
+hourstextbox.pack()
+
+#minutes text box
+minutestextbox = Text(master, height=1, width=10)
+minutestextbox.pack()
+
+#seconds text box
+secondstextbox = Text(master, height=1, width=10)
+secondstextbox.pack()
 
 
-
-button = Button(master, text = "Confirm", command = open_new_window)
+button = Button(master, text = "Confirm", command = lambda: [open_new_window, retrievehours]) #doesn't work; wanted to use this to have the button open a new window and store the user input hours, minutes, and seconds values
 button2 = Button(master, text = "Exit", command = master.quit)
 button.pack(pady=10)
 button2.pack(pady=10)
 master.mainloop()
-# need to figure out how to store whichever option is picked from the drop down menu
